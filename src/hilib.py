@@ -31,7 +31,6 @@ import random
 import string
 import cgi
 
-from pprint import pprint
 
 try:
     import simplejson as json
@@ -42,6 +41,7 @@ import socket
 socket.setdefaulttimeout(40) # 40s
 
 from logger import Logger
+from xdg_support import get_cache_file
 
 def timestamp():
     return int(time.time() * 1000)
@@ -56,13 +56,12 @@ def radix(n, base=36):
 def timechecksum():
     return radix(timestamp())
 
-__cookies__ = os.path.join(os.path.dirname(__file__), 'cookies.txt')
+__cookies__ = get_cache_file("cookie.txt")
 
 class HiLib(Logger):
-    
     def __init__(self, username, password):
         
-        self.username = username
+        self.username = username.decode("utf-8").encode("gbk")
         self.password = password
         
         # 保存cookie
@@ -87,22 +86,24 @@ class HiLib(Logger):
         ret = self.opener.open(req)
         ret.read() # Fix
         ret = self.api_request("check", v=30, time=timechecksum())        
-        pprint( ret)
+        self.logdebug("Login check return value: %s", ret)
         
         # 登陆校验成功.
         if ret["result"] == "ok":
             self.cookiejar.save()
+            self.loginfo("Login check success!")
             return True
         
         # 登陆校验失败(超过两次登陆校验)
         elif stage >= 2:
+            self.loginfo("Login check failed!")
             return False
         assert ret['result'] == 'offline'
         req = urllib2.Request('http://passport.baidu.com/api/?login&tpl=mn&time=%d' % timestamp())
         data = self.opener.open(req).read().strip()[1:-1] # remove brackets
         data = eval(data, type('Dummy', (dict,), dict(__getitem__=lambda s,n:n))())
         if int(data["error_no"]) != 0:
-            print "Login passport error: %s", data
+            self.logdebug("Login passport error: %s", data)
             return False
         param_out = data["param_out"]
         param_in = data["param_in"]
@@ -113,13 +114,13 @@ class HiLib(Logger):
         params["password"] = self.password
         params["safeflg"]  = ""
         params["mem_pass"] = "on"
-        if int(params["verifycode"]) == 1:
-            # params["verifycode"] = self.get_verify_code()
-            # 验证码放在这里不合适
-            pass
+        if int(params["verifycode"]) == 1 and stage == 1:
+            self.loginfo("Login check require verifycode")
+            params["verifycode"] = self.get_verify_code()
             
         params['staticpage'] = 'http://web.im.baidu.com/popup/src/login_jump.htm'
-        pprint(params)
+        self.logdebug("After filing params: %s", params)
+
         req = urllib2.Request('https://passport.baidu.com/api/?login',
                               data=urllib.urlencode(params))
         html = self.opener.open(req).read()
@@ -127,6 +128,10 @@ class HiLib(Logger):
         self.opener.open(url).read()
         
         # 二次登陆校验
+        if stage == 0:
+            self.loginfo("Begin second login check..")
+        elif stage == 1:    
+            self.loginfo("Begin three login check..")
         return self.login(stage=stage+1)
     
     def init(self):
@@ -145,8 +150,36 @@ class HiLib(Logger):
         ret = self.api_request("init", method="POST", status="online")
         
         if ret["result"] == "ok":
-            pass
-    
+            self.loginfo("Login ok: username=%s, nick=%s", ret["content"]["username"],
+                         ret["content"]["nickname"])
+            
+        # 第一次 pick 自己是否登陆成功,  ack = 0
+        self.pick()    
+        ret = self.api_request("getmultiteaminfo")
+        self.logdebug("Group: %s", ret)
+        
+        ret = self.api_request('getmultifriendlist', data="", seq=self.seq,
+                       tid=0, page=0, field='relationship,username,showname,showtype,status')
+        self.logdebug("Friends list:", ret)
+        
+    def pick(self):    
+        ''' main callable func.'''
+        ret = self.api_request("pick", type=23, flag=1, ack=self.pickack)
+        if ret["result"] != "ok":
+            if ret["result"] == "kicked":
+                self.logerror("Kicked by system!")
+            elif ret["result"] == "networkerror":
+                self.log.fatal("Network error!")
+            else:    
+                self.logerror("Pick error: %s", ret)
+        if ret["content"]:
+            self.pickack = ret["content"]["ack"]
+            for field in ret["content"]["fields"]:
+                self.handle_pick_field(field)
+                
+    def handle_pick_field(self, field):            
+        pass
+        
     def get_verify_code(self):
         url = 'https://passport.baidu.com/?verifypic&t=%d' % timestamp()
         req = urllib2.Request(url)
@@ -176,30 +209,24 @@ class HiLib(Logger):
             body = urllib.urlencode(data)
             req = urllib2.Request(url, data=body)
             
+        self.logdebug("API request url: %s", url)    
         start = time.time()    
         try:
             ret = self.opener.open(req)
         except Exception, e:    
             if retry_limit == 0:
-                print "Api request error: url=%s error=%s" % url, e
+                self.logdebug("API request error: url=%s error=%s",  url, e)
                 return dict(result="network_error")
             else:
                 retry_limit -= 1
                 return self.api_request(api, method, extra_data, retry_limit, **params)
-            
         raw = ret.read()
         try:
             data = json.loads(raw)
         except:    
             data = eval(raw, type("Dummy", (dict,), dict(__getitem__=lambda s,n: n))())
-        print "API response %s: %s TT=%.3fs" % (api, data, time.time() - start )
+        self.logdebug("API response %s: %s TT=%.3fs", api, data, time.time() - start )
         return data
-    
-    def init(self):
-        
-        # Init.
-        pass
-
 
 if __name__ == "__main__":    
     pass
