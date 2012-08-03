@@ -198,8 +198,8 @@ class HiLib(Logger):
     def init(self):
         
         # Init.
+        pass
 
 
 if __name__ == "__main__":    
-    hi_lib = HiLib("小邪兽_".decode("utf-8").encode("gbk"), "houshao55.")
-    hi_lib.login()
+    pass
