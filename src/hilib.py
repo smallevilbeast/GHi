@@ -1,9 +1,13 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Copyright (C) 2012 smallevilbeast
-# Author:     smallevilbeast <houshao55@gmail.com>
-# Maintainer: smallevilbeast <houshao55@gmail.com>
+# Copyright (C) Feather Workshop 2012
+#
+# Author:     Feather.et.ELF <fledna@qq.com>
+#             smallevilbeast <houshao55@gmail.com>
+#
+# Maintainer: Feather.et.ELF <fledna@qq.com>
+#             smallevilbeast <houshao55@gmail.com>
 # 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
