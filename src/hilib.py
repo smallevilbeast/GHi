@@ -79,10 +79,30 @@ class HiLib(Logger):
         
         self.cookiejar = cj
         self.opener = opener
-        self.seq = 0 
+        self.__seq = 0 
         self.apidata = dict()
-        self.pickack = ""
+        self.__pickack = ""
         self.last_message_timestamp = 0
+        
+        self.group_infos = []
+        self.multi_team_info = []
+        self.block_list = []
+        self.old_system = []
+        self.old_message = []
+        self.old_notify = []
+        self.old_notify = []
+        self.system_message = []
+        self.old_group_message = []
+        
+    @property    
+    def seq(self):    
+        ret = self.__seq
+        self.__seq += 1
+        return ret
+    
+    @seq.setter
+    def seq(self, value):
+        self.__seq = value
         
     def login(self, stage=0):
         self.apidata = dict()
@@ -159,16 +179,72 @@ class HiLib(Logger):
             
         # 第一次 pick 自己是否登陆成功,  ack = 0
         self.pick()    
-        ret = self.api_request("getmultiteaminfo")
-        self.logdebug("Group: %s", ret)
         
-        ret = self.api_request('getmultifriendlist', data="", seq=self.seq,
-                       tid=0, page=0, field='relationship,username,showname,showtype,status')
-        self.logdebug("Friends list:", ret)
+        # 获取分组信息
+        self.get_multi_team_info() 
+        self.logdebug("Team infos: %s", self.multi_team_info)
+        
+        # 获取阻止联系人信息
+        self.get_block_list()
+        self.logdebug("Block list: %s", self.block_list)
+        
+        # 获取离线系统信息
+        self.get_old_system()
+        self.logdebug("Old system: %s", self.old_system)
+        
+        # 获取离线消息
+        self.get_old_message()
+        self.logdebug("Old message: %s", self.old_message)
+        
+        # 获取离线通知信息
+        self.get_old_notify()
+        self.logdebug("Old notify: %s", self.old_notify)
+        
+        # 获取系统信息 
+        self.get_system_message()
+        
+        # 获取离线群信息
+        self.get_old_group_message()
+        self.logdebug("Old group message: %s", self.old_group_message)
+        
+        return True
+        
+    def get_multi_team_info(self):
+        ret = self.api_request("getmultiteaminfo")
+        if ret["result"] == "ok":
+            self.multi_team_info = ret["content"]["fields"]
+            
+    def get_block_list(self):        
+        ret = self.api_request("blocklist", page=0)
+        if ret["result"] == "ok":
+            self.block_list = ret["content"]["fields"]
+            
+    def get_old_system(self):        
+        ret = self.api_request('oldsystem', lastMessageId=0, lastMessageTime=0)
+        if ret["result"] == "ok":
+            self.old_system = ret["content"]["fields"]
+            
+    def get_old_message(self):        
+        ret = self.api_request('oldmessage', lastMessageId=0, lastMessageTime=0)
+        if ret["result"] == "ok":
+            self.old_message = ret["content"]["fields"]
+        
+    def get_old_notify(self):        
+        ret = self.api_request('oldmessage', lastMessageId=0, lastMessageTime=0)
+        if ret["result"] == "ok":
+            self.old_notify = ret["content"]["fields"]
+            
+    def get_system_message(self):        
+        self.api_request("getsystemmessage")
+        
+    def get_old_group_message(self):    
+        ret = self.api_request("oldgroupmessage", lastGid=0, lastMessageId=0, lastMessageTime=0)
+        if ret["result"] == "ok":
+            self.old_group_message = ret["content"]["fields"]
         
     def pick(self):    
         ''' main callable func.'''
-        ret = self.api_request("pick", type=23, flag=1, ack=self.pickack)
+        ret = self.api_request("pick", type=23, flag=1, ack=self.__pickack)
         if ret["result"] != "ok":
             if ret["result"] == "kicked":
                 self.logerror("Kicked by system!")
@@ -177,7 +253,7 @@ class HiLib(Logger):
             else:    
                 self.logerror("Pick error: %s", ret)
         if ret["content"]:
-            self.pickack = ret["content"]["ack"]
+            self.__pickack = ret["content"]["ack"]
             for field in ret["content"]["fields"]:
                 self.handle_pick_field(field)
                 
@@ -188,9 +264,68 @@ class HiLib(Logger):
         url = 'https://passport.baidu.com/?verifypic&t=%d' % timestamp()
         req = urllib2.Request(url)
         data = self.opener.open(req).read()
-        with open("./pic.jpg", "wb") as fp:
+        pic_image = get_cache_file("pic.jpg")
+        with open(pic_image, "wb") as fp:
             fp.write(data)
-        return raw_input("piz input code > ").strip()    
+        if os.path.exists(pic_image):    
+            return pic_image
+        else:
+            return None
+        
+    def query_info(self, username):    
+        ret = self.api_request("queryinfo", username=username,
+                               field="relationship,username,showname,showtype,status")
+        if ret["result"] == "ok":
+            return ret["content"]["fields"]
+        return None
+    
+    def verify_code(self, type, **params):
+        ret = self.api_request("verifycode", type=type, **params)
+        vdata = ret["content"]["validate"]
+        
+        if vdata.get("v_code", None):
+            return ",".join([vdata['v_url'], vdata['v_period'], vdata['v_time'], vdata['v_code']])
+        else:
+            self.logerror('Verifycode not implemented! type=%s, args=%s', type, params)
+            return None
+        
+        image_url = 'http://vcode.im.baidu.com/cgi-bin/genimg?%s&_time=%s' % (vdata["v_url"], timechecksum())
+        data = self._opener.open(image_url).read()
+        pic_image = get_cache_file("pic.jpg")
+        with open(pic_image, 'wb') as fp:
+            fp.write(data)
+            self.loginfo('Verify code pic download ok!')
+        code = 'abcd'
+        return ','.join([vdata['v_url'], vdata['v_period'], vdata['v_time'], code])
+    
+    def add_friend(self, username, tid=0, comment=u""):
+        if not isinstance(comment, unicode): comment = unicode(comment, "utf-8")
+        users = self.query_info(username)
+        if users in None:
+            self.logerror("Add friend <uid:%s> failed: aquire userinfo fail", username)
+            return False
+        # info = users[0]
+        #if info['relationship'] != 2:
+        #    self.logerror('Add friend <uid:%s> failed: relationship != 2', username)
+        #    return False
+        validate = self.verify_code(type="addfriend", username=username)
+        ret = self.api_request("addfriend",  username=username, tid=tid, comment=comment, validate=validate)
+        
+        if ret["result"] == "ok":
+            return True
+        else:
+            self.logerror('Add friend <uid:%s> failed: %s', username, ret)
+        return False
+    
+    def delete_friend(self, username):
+        validate = self.verifycode(type='deletefriend', username=username)
+        ret = self.api_reqest('deletefriend', username=username, validate=validate)
+        if ret['result'] == 'ok':
+            return True
+        else:
+            self.logerror('Delete friend <uid:%s> failed: %s', username, ret)
+        return False
+    
         
     def api_request(self, api, method="GET", extra_data=dict(), retry_limit=2, **params):    
         url = urlparse.urljoin("http://web.im.baidu.com/", api)
@@ -233,4 +368,6 @@ class HiLib(Logger):
         return data
 
 if __name__ == "__main__":    
-    pass
+    hi_lib = HiLib(sys.argv[1], sys.argv[2])
+    if hi_lib.login():
+        hi_lib.init()

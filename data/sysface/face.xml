@@ -1,0 +1,177 @@
+<StockFace>
+  <FaceGroup name="默认分组">
+  <Face name="微笑" id="d01" shortcut=":)" md5="1e376a99d4059562772aad9ac065fd71" type="gif" frame="0" trans="1" freq="1"/>
+  <Face name="大笑" id="d02" shortcut=":D" md5="c5ce7689438e5ee92c5942d4885fc198" type="gif" frame="0" trans="1" freq="1"/>
+  <Face name="偷笑" id="d03" shortcut="(tx)" md5="d2ff68289e44c32d61f17e9cfb8f781a" type="gif" frame="2" trans="1" freq="1"/>
+  <Face name="憨笑" id="d04" shortcut=":o" md5="564396330c9e704c27533dd0a9f38d56" type="gif" frame="0" trans="1"/>
+  <Face name="得意" id="d05" shortcut="(dy)" md5="33991a718d98b7bde46d1656acd1d84f" type="gif" frame="0" trans="1"/>
+  <Face name="可爱" id="d06" shortcut="(ka)" md5="1eac4820cb2162ad0ea9050f730701ea" type="gif" frame="0" trans="1" freq="1"/>
+  <Face name="害羞" id="d07" shortcut="(hx)" md5="afb7b910b894d8638a5f5f60d66080bb" type="gif" frame="4" trans="1" freq="1"/>
+  <Face name="乖" id="d08" shortcut="(oo)" md5="6eeeea78151b0d992342b5d974ea9748" type="gif" frame="0" trans="1"/>
+  <Face name="淘气" id="d09" shortcut="(tq)" md5="3567d74d273570047d563a52487b458d" type="gif" frame="0" trans="1" freq="1"/>
+  <Face name="调皮" id="d10" shortcut=":p" md5="17a002956048d2cc3e7136a60995f4c5" type="gif" frame="2" trans="1" freq="1"/>
+  <Face name="流泪" id="d11" shortcut="(ll)" md5="6d177c2e8caa44b47950afd1c2d94ea1" type="gif" frame="2" trans="1" freq="1"/>
+  <Face name="大哭" id="d12" shortcut=":'(" md5="f2468ad19982b6109525f86e60da0a40" type="gif" frame="2" trans="1"/>
+  <Face name="撇嘴" id="d13" shortcut="(pz)" md5="f4075f32764665658fe69d475536685f" type="gif" frame="0" trans="1"/>
+  <Face name="闭嘴" id="d14" shortcut=":-#" md5="97aac5ef30ca5c313f5055d3303a901a" type="gif" frame="2" trans="1"/>
+  <Face name="嘘" id="d15" shortcut="(xu)" md5="ea12132c217e29cc32a70ef2123baa55" type="gif" frame="3" trans="1"/>
+  <Face name="鄙视" id="d16" shortcut="(bs)" md5="0fd150d82ae7f2d174c9601f9ee09247" type="gif" frame="0" trans="1" freq="1"/>
+  <Face name="傲慢" id="d17" shortcut="(am)" md5="8484e2fcd13826ff6d311fa23f6133f1" type="gif" frame="0" trans="1" freq="1"/>
+  <Face name="白眼" id="d18" shortcut="(fc)" md5="46e7c6b53203f314943f5af66f6b9daf" type="gif" frame="0" trans="1" freq="1"/>
+  <Face name="思考" id="d19" shortcut="(sk)" md5="8c1066c3a4fc9115b46e3ae72a19e3f4" type="gif" frame="2" trans="1"/>
+  <Face name="困" id="d20" shortcut="|-)" md5="fd2bdb138346f328795d068df107ec90" type="gif" frame="1" trans="1"/>
+  <Face name="睡" id="d21" shortcut="(zz)" md5="d6c03a77dc812595b2f41fdde34d05a6" type="gif" frame="2" trans="1"/>
+  <Face name="汗" id="d22" shortcut="(lh)" md5="fd2f51cd66989306299d8ad075abbc89" type="gif" frame="1" trans="1"/>
+  <Face name="尴尬" id="d23" shortcut=":$" md5="b143058415f04e4f21302736326fb37c" type="gif" frame="2" trans="1" freq="1"/>
+  <Face name="惊讶" id="d24" shortcut=":-o" md5="c6fbb9628da63dc12c9a1fef25dea934" type="gif" frame="0" trans="1" freq="1"/>
+  <Face name="惊恐" id="d25" shortcut="(jk)" md5="4a19620c98f2d809ea46900a0b552d7c" type="gif" frame="0" trans="1"/>
+  <Face name="疑问" id="d26" shortcut="(?)" md5="7e9cbda5e0b325f01d478f8e4adf69b2" type="gif" frame="0" trans="1"/>
+  <Face name="晕" id="d27" shortcut=":s" md5="18c3ccd14d992d8e5aa30acfe670d42f" type="gif" frame="0" trans="1"/>
+  <Face name="敲打" id="d28" shortcut="(qd)" md5="d237de97c3277b7749ce839db39b0649" type="gif" frame="2" trans="1"/>
+  <Face name="难过" id="d29" shortcut=":(" md5="f2e7df81f1e48584a82c82f99d266b7c" type="gif" frame="0" trans="1" freq="1"/>
+  <Face name="委屈" id="d30" shortcut="(wq)" md5="3ced67ed7484ec180470b6cf8f0e44b3" type="gif" frame="0" trans="1" freq="1"/>
+  <Face name="色" id="d31" shortcut="(se)" md5="5c0aacf4ce01a07aa72ced20edfb1fb0" type="gif" frame="0" trans="1" freq="1"/>
+  <Face name="抓狂" id="d32" shortcut="(zk)" md5="fd78f2b8f16086a940e90f370b2bb0d4" type="gif" frame="1" trans="1" freq="1"/>
+  <Face name="愤怒" id="d33" shortcut=":@" md5="c6d1d4982260a4bad13aab943f7799f0" type="gif" frame="0" trans="1"/>
+  <Face name="吐" id="d34" shortcut="+o(" md5="658d87d64e128385f28a59c15aa8cb91" type="gif" frame="2" trans="1"/>
+  <Face name="衰" id="d35" shortcut="(sh)" md5="ae2b37bc2c8186a5dad63a583ad278cb" type="gif" frame="0" trans="1" freq="1"/>
+  <Face name="再见" id="d36" shortcut="(zj)" md5="b6db7f3a9e8a9c864046eb0eaa15942d" type="gif" frame="0" trans="1"/>
+  <Face name="左拥抱" id="d37" shortcut="({)" md5="3890735fdd2f25319367532f660bbcd2" type="gif" frame="0" trans="1"/>
+  <Face name="右拥抱" id="d38" shortcut="(})" md5="28a6dcccc96ad6d3082a0ff5554bebd6" type="gif" frame="0" trans="1"/>
+  <Face name="闪人" id="d39" shortcut="(sr)" md5="eb06e9170d5b470f124d3943f537e714" type="gif" frame="0" trans="1"/>
+  <Face name="刀" id="d40" shortcut="(d)" md5="d32893593db6217773e102bd694db4d8" type="gif" frame="2" trans="1"/>
+  <Face name="吻" id="d41" shortcut="(w)" md5="11d117a72c9cd5ffa2110c31cb4a385b" type="gif" frame="0" trans="1"/>
+  <Face name="爱情" id="d42" shortcut="(ai)" md5="7f73aeabe8ddb4bb23e06de4e6072e40" type="gif" frame="0" trans="1" freq="1"/>
+  <Face name="心碎" id="d43" shortcut="(xs)" md5="b5fbcef53bf2d695db6bd48faa326585" type="gif" frame="1" trans="1" freq="1"/>
+  <Face name="鲜花" id="d44" shortcut="(xh)" md5="5bc342dfc4b92d4c0cad3a4207a99380" type="gif" frame="0" trans="1"/>
+  <Face name="枯萎" id="d45" shortcut="(kw)" md5="9ef7d4c187f298a10953f5096cbe9162" type="gif" frame="0" trans="1"/>
+  <Face name="胜利" id="d46" shortcut="(sl)" md5="f08d998e04027d92feaf0f8667bb016c" type="gif" frame="0" trans="1"/>
+  <Face name="OK" id="d47" shortcut="(ok)" md5="f143718613f47bb929e7134b2457f260" type="gif" frame="0" trans="1"/>
+  <Face name="大拇指" id="d48" shortcut="(n)" md5="2f5113cfd0a33bfec485c222051db205" type="gif" frame="0" trans="1" freq="1"/>
+  <Face name="弱" id="d49" shortcut="(r)" md5="2ea09b4e887a6871e22d6e52a014179c" type="gif" frame="0" trans="1"/>
+  <Face name="握手" id="d50" shortcut="(ws)" md5="a21bf8c01f41b9148b81aa1b53fb3a0e" type="gif" frame="0" trans="1"/>
+  <Face name="蛋糕" id="d51" shortcut="(^)" md5="47198bf11c75a03e6249a1ccc1064bce" type="gif" frame="0" trans="1" freq="1"/>
+  <Face name="咖啡" id="d52" shortcut="(kf)" md5="d6bde4b624846fd08500053358e154ae" type="gif" frame="0" trans="1"/>
+  <Face name="吃饭" id="d53" shortcut="(cf)" md5="e3aac3a4e1e36a02959f62d9bbcab7ac" type="gif" frame="0" trans="1"/>
+  <Face name="太阳" id="d54" shortcut="(#)" md5="75132ac5d361fd71a0b8acc6d99b7692" type="gif" frame="0" trans="1" freq="1"/>
+  <Face name="月亮" id="d55" shortcut="(s)" md5="5bbb83756e3e652b43f9f03d638718b4" type="gif" frame="0" trans="1"/>
+  <Face name="星星" id="d56" shortcut="(*)" md5="dcb31cac1b742034e9cdc5254f309d00" type="gif" frame="0" trans="1"/>
+  <Face name="便便" id="d57" shortcut="(bb)" md5="490183579bb95ab6eee1d695cdaef213" type="gif" frame="0" trans="1"/>
+  <Face name="猪头" id="d58" shortcut="(zt)" md5="ede07ac7f02fbc613381069a77ff1b5c" type="gif" frame="0" trans="1"/>
+  <Face name="钱" id="d59" shortcut="(q)" md5="eeb68b5c092155df924e69b2a1de21f9" type="gif" frame="0" trans="1"/>
+  <Face name="Hi" id="d60" shortcut="(hi)" md5="33037bedc05c33f5998f875c608d4ba1" type="gif" frame="2" trans="1" freq="1"/>
+  </FaceGroup>
+  
+  <FaceGroup name="Hi气泡熊">
+	  <Face name="微笑 " id="b01" shortcut="(wx)" md5="36c7fbde6243e1ab056d26ed04da4626" type="gif"/>
+	  <Face name="帅哥" id="b02" shortcut="(sg)" md5="8173ba953e8b2cba6a9745e798964940" type="gif"/>
+	  <Face name="美女" id="b03" shortcut="(mm)" md5="266fc64ac2949059bc4247ff36c8c72a" type="gif"/>
+	  <Face name="老大" id="b04" shortcut="(ld)" md5="013f44177c9661fa9e9b53a5d7ad810a" type="gif"/>
+	  <Face name="哈哈哈" id="b05" shortcut="(:dx)" md5="ece2d90fabf36d2868d033fe941c2505" type="gif"/>
+	  <Face name="奸笑" id="b06" shortcut="(jx)" md5="ed27bd44748988b291e3de517000a8ea" type="gif"/>
+	  <Face name="傻乐" id="b07" shortcut="(ssl)" md5="9c1abc04d03aef9f13672fcb7c27b5df" type="gif"/>
+	  <Face name="飞吻 " id="b08" shortcut="(:fw)" md5="82f2fac9575da046058dd47e204a2a5f" type="gif"/>
+	  <Face name="害羞 " id="b09" shortcut="(:hx)" md5="29c4befb29a5b1d3856b2812c6426246" type="gif"/>
+	  <Face name="花痴" id="b10" shortcut="(hc)" md5="d2f1967481629b751c015ddb2897aef5" type="gif"/>
+	  <Face name="憧憬" id="b11" shortcut="(cj)" md5="2d27536e0981cec8f6654f3f638e0cfe" type="gif"/>
+	  <Face name="你牛" id="b12" shortcut="(nb)" md5="07f0eab7fc6e195da290fee8bb61861a" type="gif"/>
+	  <Face name="鼓掌" id="b13" shortcut="(gz)" md5="63ceb8fc549ab868cc2eb588f24805fa" type="gif"/>
+	  <Face name="可爱 " id="b14" shortcut="(:ka)" md5="f593596553738a8070b15cbe3b453a4b" type="gif"/>
+	  <Face name="委屈 " id="b15" shortcut="(:wq)" md5="6f5cf65eb4860e5b9c161e96334257a5" type="gif"/>
+	  <Face name="大哭 " id="b16" shortcut="(:dk)" md5="4b5649fe0d7ca648e9ef875430726629" type="gif"/>
+	  <Face name="泪奔 " id="b17" shortcut="(:lb)" md5="5231f00f23672f96b49e23b903f51571" type="gif"/>
+	  <Face name="寻死" id="b18" shortcut="(:xs)" md5="ea8dd5a956ba9e59160e9a6a97fd3159" type="gif"/>
+	  <Face name="惊讶 " id="b19" shortcut="(jy)" md5="eb2defeb5905451d0d07f1ff466909aa" type="gif"/>
+	  <Face name="疑问 " id="b20" shortcut="(:yw)" md5="b7c86b2b58cfded752fef914143325bb" type="gif"/>
+	  <Face name="鄙视 " id="b21" shortcut="(bsn)" md5="9b84f79c40188db4771c2577187b154e" type="gif"/>
+	  <Face name="大骂" id="b22" shortcut="(dm)" md5="646ec54dda651d383db0038e925eb601" type="gif"/>
+	  <Face name="狂怒" id="b23" shortcut="(kn)" md5="e70bf9f4757ae74b4f86471aa0dc72d5" type="gif"/>
+	  <Face name="囧" id="b24" shortcut="(j)" md5="40ad40f89dce47fc7f020e86cf951750" type="gif"/>
+	  <Face name="晕 " id="b25" shortcut="(yun)" md5="83128d1230675135df522efa6fdd32e7" type="gif"/>
+	  <Face name="呕吐" id="b26" shortcut="(tu)" md5="4fc9d77ddbc754ee674f0f9c50e2056f" type="gif"/>
+	  <Face name="财迷" id="b27" shortcut="(cm)" md5="97d24895c4d6033ab5d302ebbb72edb6" type="gif"/>
+	  <Face name="睡了" id="b28" shortcut="(zzz)" md5="31f561aa78f16cea9e1f02183312b58c" type="gif"/>
+	  <Face name="思考 " id="b29" shortcut="(xk)" md5="1105a0ae3b17c52432a65833ad825739" type="gif"/>
+	  <Face name="汗 " id="b30" shortcut="(han)" md5="e5744442fa792ea055ad78137f1a1cac" type="gif"/>
+	  <Face name="无语" id="b31" shortcut="(wy)" md5="2d15778775f3c0f76bcf47abc8a375f8" type="gif"/>
+	  <Face name="拜" id="b32" shortcut="(bai)" md5="fcf60dc85c60f1800d030bd89e07e3f4" type="gif"/>
+	  <Face name="鞠躬" id="b33" shortcut="(jg)" md5="6915fe7dea48ceb50e57296782b423f7" type="gif"/>
+	  <Face name="累了" id="b34" shortcut="(lei)" md5="5e5db52f522182d91051c607be072a37" type="gif"/>
+	  <Face name="病了" id="b35" shortcut="(b)" md5="47ad9be303e3f1ffe93876051959a787" type="gif"/>
+	  <Face name="墙角" id="b36" shortcut="(qj)" md5="0022cb45e57684b4e87b48783dc12183" type="gif"/>
+	  <Face name="超人" id="b37" shortcut="(cr)" md5="b26fcee08cea8022c47f75f2a092823f" type="gif"/>
+	  <Face name="戳" id="b38" shortcut="(ch)" md5="6fc208bfaff0d8f40bb0db9196446b12" type="gif"/>
+	  <Face name="跳舞" id="b39" shortcut="(tw)" md5="d9513f71ad92be76312f665fcb241879" type="gif"/>
+	  <Face name="鬼脸" id="b40" shortcut="(gl)" md5="8006125c59cb94d0f73d5404a25725ae" type="gif"/>
+	  <Face name="无聊" id="b41" shortcut="(wl)" md5="e23def0114dd74dca485b1c31d59f3f3" type="gif"/>
+	  <Face name="撞墙" id="b42" shortcut="(zq)" md5="e91b1ccab6f366af693fec4067cdbd7a" type="gif"/>
+	  <Face name="顶" id="b43" shortcut="(sp)" md5="8bf6b90924fe625318b23753915d179b" type="gif"/>
+	  <Face name="Hi " id="b44" shortcut="(:hi)" md5="630df8bd6950c9395b39c611809822fb" type="gif"/>
+	  <Face name="饭" id="b45" shortcut="(ff)" md5="82fa0db5f4ac8e95c7fa97c2f028a411" type="gif"/>
+	  <Face name="蛋糕 " id="b46" shortcut="(dg)" md5="78703efec3547b13f2e6e5a3dd63286a" type="gif"/>
+	  <Face name="礼物" id="b47" shortcut="(lw)" md5="2e95741468c5cf64bb9d51a12c374646" type="gif"/>
+	  <Face name="心" id="b48" shortcut="(xin)" md5="a0bed224deffa67327623313cc5c5231" type="gif"/>
+	  <Face name="心碎 " id="b49" shortcut="(xsl)" md5="745e57c9ea78d1c48a030b793a2539af" type="gif"/>
+	  <Face name="玫瑰" id="b50" shortcut="(mg)" md5="4afbd9e87b0e27b98d4620e457a8ac63" type="gif"/>
+	  <Face name="炸弹" id="b51" shortcut="(zd)" md5="5f4fdb939b838fce3f78161d4f5b5a3e" type="gif"/>
+	  <Face name="集体舞" id="b52" shortcut="(jtw)" md5="f0d88e469af4fefd1170c4c85d2bfb99" type="gif"/>
+	  <Face name="打人" id="b53" shortcut="(dr)" md5="5ef9889599d2f0ddfd990746809d6166" type="gif"/>
+	  <Face name="拍拍" id="b54" shortcut="(pp)" md5="d885a150c3d14aafeaf823fa57a09c68" type="gif"/>
+	  <Face name="亲亲" id="b55" shortcut="(qq)" md5="1aa61038900f78cb8b4f57ca6f00fa17" type="gif"/>
+	  <Face name="握手 " id="b56" shortcut="(:ws)" md5="4c753e16dd5c9dc0da21402374691735" type="gif"/>
+	  <Face name="安慰" id="b57" shortcut="(aw)" md5="ee8fa5bcbd36241820d14ae1b46648d2" type="gif"/>
+	  <Face name="石头" id="b58" shortcut="(st)" md5="53cdc51684cc27b688cebd3e8a4801a5" type="gif"/>
+	  <Face name="剪刀" id="b59" shortcut="(jz)" md5="8467ecac043b423891b928f654483156" type="gif"/>
+	  <Face name="布" id="b60" shortcut="(bu)" md5="7b7492097c2fbb7a4c553c254f4a5994" type="gif"/>
+	  <Face name="恭喜啦" id="b61" shortcut="(gx)" md5="ee79ba86cbf7c888fb05a1284617857d" type="gif"/>
+	  <Face name="啵啵" id="b62" shortcut="(bo)" md5="8916a811f491ddfafd61986375665cc9" type="gif"/>
+  </FaceGroup>
+ 
+  <FaceGroup name="有啊表情">
+    <Face name="男兜" id="y01" shortcut="(nd)" type="gif" md5="d923dbf00b642078c2e3783f6f79b7bc"/>
+    <Face name="女兜" id="y02" shortcut="(nvd)" type="gif" md5="f054e7cb63e9c3ae6dc92e4f7970b15a"/>
+    <Face name="开心" id="y03" shortcut="(kx)" type="gif" md5="3984744c44406f9516ac97f14f8f4a94"/>
+    <Face name="乖乖" id="y04" shortcut="(gg)" type="gif" md5="97a3bc26de5e7d5c578ffcff92784234"/>
+    <Face name="偷笑　" id="y05" shortcut="(:tx)" type="gif" md5="a75928d0fe98d17c084ac411750da03b"/>
+    <Face name="大笑　" id="y06" shortcut="(dx)" type="gif" md5="a2d411f7eb8472b2dc5cb5d0e6cd871d"/>
+    <Face name="抽泣" id="y07" shortcut="(cq)" type="gif" md5="eb4e6ddad686dc9a01983ade1c2959c0"/>
+    <Face name="大哭　" id="y08" shortcut="(dk)" type="gif" md5="1eb8aabfaa423e6fbdfa2e6faedea210"/>
+    <Face name="无奈" id="y09" shortcut="(wn)" type="gif" md5="480e05a180234b2eed917659ad8bc5b9"/>
+    <Face name="滴汗" id="y10" shortcut="(hd)" type="gif" md5="e63b0f3f136ff6f48b214c19b0547a1d"/>
+    <Face name="叹气" id="y11" shortcut="(tqi)" type="gif" md5="01025799c89cb1eb67814b5ef3f102b6"/>
+    <Face name="狂晕" id="y12" shortcut="(ky)" type="gif" md5="24bdf1f85b7335a2bfdea21aecaa502d"/>
+    <Face name="委屈　" id="y13" shortcut="(wqu)" type="gif" md5="a8a488035f25ca63530a8a979beb72e5"/>
+    <Face name="超赞" id="y14" shortcut="(cz)" type="gif" md5="f6dffd7867799a07b36a6d5d548c8247"/>
+    <Face name="囧囧" id="y15" shortcut="(jj)" type="gif" md5="da3c71a49ef9ea18e10b6201d9fb793f"/>
+    <Face name="疑问　" id="y16" shortcut="(yw)" type="gif" md5="5a68de543ec8c72fb3142c939e2fb2e2"/>
+    <Face name="飞吻" id="y17" shortcut="(fw)" type="gif" md5="1693bff59ce27d5537f8c1c35bea08f6"/>
+    <Face name="天使" id="y18" shortcut="(ts)" type="gif" md5="0228e4709bddba1e11e0df49f40b039a"/>
+    <Face name="撒花" id="y19" shortcut="(hua)" type="gif" md5="e22e54f7be1e2e999c0a4b10c6c1fd36"/>
+    <Face name="生气" id="y20" shortcut="(sq)" type="gif" md5="ce0efd9b1065a9c32120f57cfce01fa7"/>
+    <Face name="被砸" id="y21" shortcut="(bz)" type="gif" md5="64996975385f3239169de64f0726e351"/>
+    <Face name="口水" id="y22" shortcut="(ks)" type="gif" md5="d4696e8fba488cf64b920900eae2474b"/>
+    <Face name="泪奔" id="y23" shortcut="(lb)" type="gif" md5="865e4984298507c91356f7ea93bb9c91"/>
+    <Face name="吓傻" id="y24" shortcut="(xia)" type="gif" md5="a95a3f61f00c3c6a2542c44e5a8c54f1"/>
+    <Face name="吐舌头" id="y25" shortcut="(tst)" type="gif" md5="4f4dd01413a96ec2982cd318f4b7f317"/>
+    <Face name="点头" id="y26" shortcut="(dt)" type="gif" md5="c66071425f7cfffa00acc9c5ae299e77"/>
+    <Face name="随意吐" id="y27" shortcut="(syt)" type="gif" md5="f1a07cb1c44d659831dbef7e8d4fa13d"/>
+    <Face name="旋转" id="y28" shortcut="(xz)" type="gif" md5="a9a909e49309d8430bd88bedcd213d9f"/>
+    <Face name="困困" id="y29" shortcut="(kk)" type="gif" md5="0f6c2477050285a33347805d86a94d17"/>
+    <Face name="鄙视　" id="y30" shortcut="(:bs)" type="gif" md5="c5c3990f843ff99b964dfbc5ce77f3ac"/>
+    <Face name="告示" id="y31" shortcut="(gs)" type="gif" md5="3c0f70c965fb07a0c92ba6010b115c93"/>
+    <Face name="篮球" id="y32" shortcut="(lq)" type="gif" md5="d6c92983218597f1e03374f90b0c8896"/>
+    <Face name="狂顶" id="y33" shortcut="(kd)" type="gif" md5="c2cd066e8df775ee02e1f84f4c8febb0"/>
+    <Face name="甩头发" id="y34" shortcut="(stf)" type="gif" md5="9b7632dc820b2a952e34dff1bee17db1"/>
+    <Face name="再见　" id="y35" shortcut="(bye)" type="gif" md5="0d98833aee6e63fcd3f1cfc728dad66b"/>
+    <Face name="超人　" id="y36" shortcut="(cc)" type="gif" md5="6210166e868bfc9747648b62b46cfcc6"/>
+    <Face name="过年好" id="y37" shortcut="(gnh)" type="gif" md5="09689b9307f90b6568340befafe39e5c"/>
+    <Face name="红包拿来" id="y38" shortcut="(hb)" type="gif" md5="bf58f8260b994cf6fa07601f5d194e3f"/>
+    <Face name="恭喜发财" id="y39" shortcut="(:gx)" type="gif" md5="399ca36413576124428b2a89c51e6970"/>
+    <Face name="欢迎光临" id="y40" shortcut="(hy)" type="gif" md5="98b000b5aa8f6f200d4c227bd0406e42"/>
+    <Face name="稍等" id="y41" shortcut="(sd)" type="gif" md5="ac7bb47cb022f8215e059573b7a721f5"/>
+    <Face name="我在线" id="y42" shortcut="(wzx)" type="gif" md5="3b225583cb9c3bdd7f4e7d47f3ff98a6"/>
+    <Face name="恕不议价" id="y43" shortcut="(byj)" type="gif" md5="e62073630069871b7f8ade45ba13c9a3"/>
+    <Face name="库房有货" id="y44" shortcut="(yh)" type="gif" md5="cf8370a69fbdf95f4cf56145687b37cd"/>
+    <Face name="货在路上" id="y45" shortcut="(zls)" type="gif" md5="64ffe8e7895c8a69bd72d9d5a2a1ed40"/>
+  </FaceGroup>
+</StockFace>
