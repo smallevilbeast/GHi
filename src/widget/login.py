@@ -42,7 +42,7 @@ class Login(Window):
     def __init__(self):
         Window.__init__(self, enable_resize=True)
         self.set_position(gtk.WIN_POS_CENTER)
-        self.set_default_size(290, 600)
+        self.set_default_size(290, 512)
         titlebar = Titlebar(["min", "max", "close"], app_name="Baidu Hi for Linux")
         titlebar.min_button.connect("clicked", lambda w: self.min_window())
         titlebar.max_button.connect("clicked", lambda w: self.toggle_max_window())
@@ -51,6 +51,7 @@ class Login(Window):
         self.add_toggle_event(titlebar.drag_box)
         
         banner_image = gtk.image_new_from_file(get_banner_image())
+        banner_box = set_widget_gravity(banner_image, (0,0,0,0), (10, 0, 0, 0))
         user_box, self.user_entry = self.create_combo_entry("帐号:")
         passwd_box, self.passwd_entry = self.create_combo_entry("密码:")
         self.remember_passwd = CheckButton("记住密码")
@@ -65,7 +66,7 @@ class Login(Window):
         
         body_table = gtk.Table(5, 1)
         body_table.set_row_spacings(10)
-        body_table.attach(banner_image, 0, 1, 0, 1, xoptions=gtk.FILL, yoptions=gtk.FILL)
+        body_table.attach(banner_box, 0, 1, 0, 1, xoptions=gtk.FILL, yoptions=gtk.FILL)
         body_table.attach(user_box, 0, 1, 1, 2, xoptions=gtk.FILL, yoptions=gtk.FILL, xpadding=8)
         body_table.attach(passwd_box, 0, 1, 2, 3, xoptions=gtk.FILL, yoptions=gtk.FILL, xpadding=8)
         # body_table.attach(self.status_box, 0, 1, 3, 4, xoptions=gtk.FILL, yoptions=gtk.FILL, xpadding=8)        
@@ -79,10 +80,10 @@ class Login(Window):
         self.login_button.set_size_request(95, 30)
         login_button_align = set_widget_gravity(set_widget_center(self.login_button),
                                                 (1, 1, 0.5, 0.5),
-                                                (30, 10, 0, 0))
+                                                (30, 30, 0, 0))
         
         main_box = gtk.VBox()        
-        # main_box.connect("expose-event", self.draw_border_mask)
+        main_box.connect("expose-event", self.draw_border_mask)
         main_box.pack_start(body_box_align, False, True)
         main_box.pack_start(login_button_align, False, True)
         

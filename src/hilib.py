@@ -26,15 +26,12 @@ import os
 import sys
 import urllib
 import urllib2
-import httplib
 import urlparse
 import re
 import cookielib
 import time
-import random
-import string
-import cgi
-
+import threading
+import gobject
 
 try:
     import simplejson as json
@@ -44,27 +41,22 @@ except ImportError:
 import socket    
 socket.setdefaulttimeout(40) # 40s
 
+import utils
 from logger import Logger
 from xdg_support import get_cache_file
 
-def timestamp():
-    return int(time.time() * 1000)
-
-def radix(n, base=36):
-    digits = string.digits + string.lowercase
-    def shortDiv(n, acc=list()):
-        q, r = divmod(n, base)
-        return [r] + acc if q == 0 else shortDiv(q, [r] + acc)
-    return ''.join(digits[i] for i in shortDiv(n))
-
-def timechecksum():
-    return radix(timestamp())
 
 __cookies__ = get_cache_file("cookie.txt")
 
-class HiLib(Logger):
+class HiLib(gobject.GObject, Logger):
+    __gsignals__ = {
+        "login-check" : (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, (bool,)),
+        "login-verify" : (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, (str,)),
+        "init_finished" : (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, ()),
+        }
+    
     def __init__(self, username, password):
-        
+        gobject.GObject.__init__(self)
         self.username = username.decode("utf-8").encode("gbk")
         self.password = password
         
@@ -94,6 +86,11 @@ class HiLib(Logger):
         self.system_message = []
         self.old_group_message = []
         
+        self.login_thread =threading.Thread(target=self.__login_check, args=(0,))
+        self.init_thread = threading.Thread(target=self.__login_init)
+        self.login_verify_condition = threading.Condition()
+        self.login_verify_code = ""
+        
     @property    
     def seq(self):    
         ret = self.__seq
@@ -104,26 +101,31 @@ class HiLib(Logger):
     def seq(self, value):
         self.__seq = value
         
-    def login(self, stage=0):
+    def login(self):
+        self.login_thread.start()
+        
+    def __login_check(self, stage=0):
         self.apidata = dict()
         req = urllib2.Request("http://web.im.baidu.com/")
         ret = self.opener.open(req)
         ret.read() # Fix
-        ret = self.api_request("check", v=30, time=timechecksum())        
+        ret = self.api_request("check", v=30, time=utils.timechecksum())        
         self.logdebug("Login check return value: %s", ret)
         
         # 登陆校验成功.
         if ret["result"] == "ok":
             self.cookiejar.save()
+            self.emit("login-check", True)
             self.loginfo("Login check success!")
             return True
         
         # 登陆校验失败(超过两次登陆校验)
         elif stage >= 2:
+            self.emit("login-check", False)
             self.loginfo("Login check failed!")
             return False
         assert ret['result'] == 'offline'
-        req = urllib2.Request('http://passport.baidu.com/api/?login&tpl=mn&time=%d' % timestamp())
+        req = urllib2.Request('http://passport.baidu.com/api/?login&tpl=mn&time=%d' % utils.timestamp())
         data = self.opener.open(req).read().strip()[1:-1] # remove brackets
         data = eval(data, type('Dummy', (dict,), dict(__getitem__=lambda s,n:n))())
         if int(data["error_no"]) != 0:
@@ -140,8 +142,10 @@ class HiLib(Logger):
         params["mem_pass"] = "on"
         if int(params["verifycode"]) == 1 and stage == 1:
             self.loginfo("Login check require verifycode")
-            params["verifycode"] = self.get_verify_code()
-            
+            self.emit("login-verify", self.get_verify_code())
+            self.login_verify_condition.acquire()
+            self.login_verify_condition.wait()
+            params["verifycode"] = self.login_verify_code
         params['staticpage'] = 'http://web.im.baidu.com/popup/src/login_jump.htm'
         self.logdebug("After filing params: %s", params)
 
@@ -158,11 +162,19 @@ class HiLib(Logger):
             self.loginfo("Begin three login check..")
         return self.login(stage=stage+1)
     
-    def init(self):
+    def set_login_verify_code(self, code):
+        self.login_verify_code = code
+        self.login_verify_condition.acquire()
+        self.login_verify_condition.notify()
+        self.login_verify_condition.release()
         
+    def init(self):    
+        self.init_thread.start()
+    
+    def __login_init(self):
         # 登陆后初始化.
         self.seq = 0
-        guid = timechecksum()
+        guid = utils.timechecksum()
         
         # API请求公用数据
         self.apidata = dict(v=30, session="", source=22, guid=guid,
@@ -206,9 +218,9 @@ class HiLib(Logger):
         # 获取离线群信息
         self.get_old_group_message()
         self.logdebug("Old group message: %s", self.old_group_message)
-        
+        self.emit("init_finished")
         return True
-        
+            
     def get_multi_team_info(self):
         ret = self.api_request("getmultiteaminfo")
         if ret["result"] == "ok":
@@ -261,7 +273,7 @@ class HiLib(Logger):
         pass
         
     def get_verify_code(self):
-        url = 'https://passport.baidu.com/?verifypic&t=%d' % timestamp()
+        url = 'https://passport.baidu.com/?verifypic&t=%d' % utils.timestamp()
         req = urllib2.Request(url)
         data = self.opener.open(req).read()
         pic_image = get_cache_file("pic.jpg")
@@ -289,7 +301,7 @@ class HiLib(Logger):
             self.logerror('Verifycode not implemented! type=%s, args=%s', type, params)
             return None
         
-        image_url = 'http://vcode.im.baidu.com/cgi-bin/genimg?%s&_time=%s' % (vdata["v_url"], timechecksum())
+        image_url = 'http://vcode.im.baidu.com/cgi-bin/genimg?%s&_time=%s' % (vdata["v_url"], utils.timechecksum())
         data = self._opener.open(image_url).read()
         pic_image = get_cache_file("pic.jpg")
         with open(pic_image, 'wb') as fp:
