@@ -52,7 +52,7 @@ class HiLib(gobject.GObject, Logger):
     __gsignals__ = {
         "login-check" : (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, (bool,)),
         "login-verify" : (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, (str,)),
-        "init_finished" : (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, ()),
+        "init-finished" : (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, ()),
         }
     
     def __init__(self, username, password):
@@ -160,7 +160,7 @@ class HiLib(gobject.GObject, Logger):
             self.loginfo("Begin second login check..")
         elif stage == 1:    
             self.loginfo("Begin three login check..")
-        return self.login(stage=stage+1)
+        return self.__login_check(stage=stage+1)
     
     def set_login_verify_code(self, code):
         self.login_verify_code = code
@@ -380,6 +380,9 @@ class HiLib(gobject.GObject, Logger):
         return data
 
 if __name__ == "__main__":    
+    def on_login_check_cb(obj, value):
+        if value:
+            obj.init()
     hi_lib = HiLib(sys.argv[1], sys.argv[2])
-    if hi_lib.login():
-        hi_lib.init()
+    hi_lib.connect("login-check", on_login_check_cb)
+    hi_lib.login()
